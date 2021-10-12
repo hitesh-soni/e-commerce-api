@@ -1,7 +1,8 @@
 {
   "all": true,
   "include": [
-    "test/**.js"
+    "test",
+    "dist"
   ],
   "exclude": []
 }

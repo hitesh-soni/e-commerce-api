@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SET NODE_ENV=production & node  --require dotenv/config ./dist/bin/www ",
+    "start": "SET NODE_ENV=production & nyc node  --require dotenv/config ./dist/bin/www ",
     "server": "babel-node ./src/bin/www.js --require dotenv/config",
     "dev": "SET NODE_ENV=development & npm-run-all server",
     "watch": "nodemon",
@@ -11,7 +11,7 @@
     "build": " npm-run-all clean prod",
     "prod": "  babel ./src --out-dir dist",
     "test": "SET NODE_ENV=test --require dotenv/config & mocha",
-    "coverage": "nyc npm run test"
+    "coverage-test": "nyc npm run test"
   },
   "dependencies": {
     "@babel/runtime": "^7.15.4",
@@ -48,6 +48,8 @@
     "eslint-plugin-import": "^2.24.2",
     "mocha": "^9.1.2",
     "nodemon": "^2.0.13",
+    "pre-commit": "^1.2.2",
     "supertest": "^6.1.6"
-  }
+  },
+  "pre-commit": [ "test" ]
 }
