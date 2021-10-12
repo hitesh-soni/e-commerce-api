@@ -53,7 +53,6 @@ class CartModel extends MyModel {
         try {
             const address = await new this.OrdersTbl(data).save();
             asyncForEach(products, async (element) => {
-                console.log({ quantity: element.quantity });
                 await this.ProductsTbl.findOneAndUpdate(
                     { _id: mongoose.Types.ObjectId(element.id) },
                     { quantity: element.quantity },

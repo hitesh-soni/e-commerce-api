@@ -7,3 +7,4 @@ logs
 keys
 env
 request_logs
+.nyc_output

@@ -55,7 +55,6 @@ class CartModel extends MyModel {
 
     getAddress = async (user_id) => {
         try {
-            console.log(user_id);
             const address = await this.AddressTbl.find({ user_id }).lean();
             return address || {};
         } catch (e) {

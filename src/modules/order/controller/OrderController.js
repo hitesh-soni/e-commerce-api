@@ -36,7 +36,7 @@ class OrderController extends MyController {
     getOrder = async (req, res) => {
         try {
             const order = await OrderModel.getOrder(req.user.id);
-            response.res200(res, order, null, 'Order created successfully');
+            response.res200(res, order, null, 'Orders');
         } catch (e) {
             log.error(res, e, this.file_path);
         }
