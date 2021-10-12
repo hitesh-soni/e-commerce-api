@@ -35,8 +35,10 @@ export default {
         },
     },
     keys: {
-        publicKEY: fs.readFileSync('./keys/public.pem', 'utf8'),
-        privateKEY: fs.readFileSync('./keys/private.pem', 'utf8'),
+        // publicKEY: fs.readFileSync('./keys/public.pem', 'utf8'),
+        // privateKEY: fs.readFileSync('./keys/private.pem', 'utf8'),
+        publicKEY: process.env.PUBLIC_KEY,
+        privateKEY: process.env.PRIVATE_KEY,
     },
     authConfig: {
         expiresIn: '1h',
