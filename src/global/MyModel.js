@@ -1,6 +1,6 @@
 import path from 'path';
 import db from 'collections/index';
-
+import sanitize from 'mongo-sanitize';
 class MyModel {
     /**
    * Class default constructor
@@ -24,6 +24,18 @@ class MyModel {
             return false;
         }
     };
+
+    deepSanitize = (value) => {
+        if (Array.isArray(value)) {
+            value.forEach((elm) => this.deepSanitize(elm));
+        }
+        if (typeof (value) === 'object' && value !== null) {
+            Object.values(value).forEach((elm) => {
+                this.deepSanitize(elm);
+            });
+        }
+        return sanitize(value);
+    }
 }
 
 export default MyModel;

@@ -20,6 +20,7 @@ class AuthModel extends MyModel {
      */
     saveUser = async (newUser, res) => {
         try {
+            newUser = this.deepSanitize(newUser);
             const user = await new this.UserTbl(newUser).save();
             user.password = undefined;
             return user;
@@ -37,6 +38,7 @@ class AuthModel extends MyModel {
      */
     deleteToken = async (condition, res) => {
         try {
+            condition = this.deepSanitize(condition);
             const response = await this.TokenTbl.deleteOne(condition);
             return response;
         } catch (e) {
@@ -53,6 +55,7 @@ class AuthModel extends MyModel {
      */
     saveToken = async (condition, res) => {
         try {
+            condition = this.deepSanitize(condition);
             const response = new this.TokenTbl(condition).save();
             return response;
         } catch (e) {

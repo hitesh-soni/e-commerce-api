@@ -14,6 +14,7 @@ class CartModel extends MyModel {
 
     getProductsMap = async (data) => {
         try {
+            data = this.deepSanitize(data);
             const updateProduct = [];
             const products = [];
             let orderTotal = 0;
@@ -51,6 +52,8 @@ class CartModel extends MyModel {
 
     createOrder = async (data, products) => {
         try {
+            data = this.deepSanitize(data);
+            products = this.deepSanitize(products);
             const address = await new this.OrdersTbl(data).save();
             asyncForEach(products, async (element) => {
                 await this.ProductsTbl.findOneAndUpdate(
@@ -67,6 +70,7 @@ class CartModel extends MyModel {
 
     getOrder = async (user) => {
         try {
+            user = this.deepSanitize(user);
             let orders = await this.OrdersTbl.find({ user }).populate({ path: 'products.product' });
             orders = orders.map((o) => o?.toObject({ getters: true }));
             return orders || {};

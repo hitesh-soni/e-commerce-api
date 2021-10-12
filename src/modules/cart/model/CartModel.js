@@ -14,6 +14,7 @@ class CartModel extends MyModel {
 
     products = async (products) => {
         try {
+            products = this.deepSanitize(products);
             const find = {
                 _id: {
                     $in: products.map((id) => mongoose.Types.ObjectId(id)),
@@ -45,6 +46,7 @@ class CartModel extends MyModel {
 
     createAddress = async (data) => {
         try {
+            data = this.deepSanitize(data);
             const address = await new this.AddressTbl(data).save();
             return address || {};
         } catch (e) {
@@ -55,6 +57,7 @@ class CartModel extends MyModel {
 
     getAddress = async (user_id) => {
         try {
+            user_id = this.deepSanitize(user_id);
             const address = await this.AddressTbl.find({ user_id }).lean();
             return address || {};
         } catch (e) {

@@ -24,6 +24,7 @@ class CategoryModel extends MyModel {
 
     createCategory = async (data) => {
         try {
+            data = this.deepSanitize(data);
             await new this.CategoriesTbl(data).save();
         } catch (e) {
             log.error(null, e, this.file_path);

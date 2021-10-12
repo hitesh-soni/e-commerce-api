@@ -19,6 +19,7 @@ class ProductsModel extends MyModel {
      */
     index = async (query) => {
         try {
+            query = this.deepSanitize(query);
             const limit = query?.limit || 10;
             const page = query?.page || 1;
             let products = [];
@@ -89,6 +90,7 @@ class ProductsModel extends MyModel {
      */
     getSingleProduct = async (query) => {
         try {
+            query = this.deepSanitize(query);
             let product = await this.ProductsTbl.findOne({ slug: query?.slug }, [
                 'tag_id',
                 'name',
@@ -118,6 +120,7 @@ class ProductsModel extends MyModel {
      */
     createProduct = async (data) => {
         try {
+            data = this.deepSanitize(data);
             await new this.ProductsTbl(data).save();
         } catch (e) {
             log.error(null, e, this.file_path);
@@ -131,6 +134,8 @@ class ProductsModel extends MyModel {
      */
     updateProduct = async (data, id) => {
         try {
+            data = this.deepSanitize(data);
+            id = this.deepSanitize(id);
             await this.ProductsTbl.findOneAndUpdate(
                 { _id: mongoose.Types.ObjectId(id) },
                 data
